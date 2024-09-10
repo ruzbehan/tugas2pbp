@@ -64,7 +64,7 @@ Pertanyaan 1 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di ata
     CP 6 :
         Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py.
         Routing pada aplikasi main dapat ditulis sebagai berikut : 
-        
+
         ```python 
         from django.urls import path
         from main.views import show_main
@@ -86,16 +86,21 @@ Pertanyaan 1 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di ata
 Pertanyaan 2 : Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
     Bagan : `Client -> URL (urls.py) -> View (views.py) -> Model (models.py) -> Template (HTML)`
-    Client akan mengirim request ke URL yang ditentukan di urls.py, yang diarahkan ke fungsi di views.py. Jika diperlukan data dari database, view akan memanggil model di models.py, dan hasil akhirnya ditampilkan menggunakan template HTML.
+    Client akan mengirim request ke URL yang ditentukan di urls.py, yang diarahkan ke fungsi di views.py. 
+    Jika diperlukan data dari database, view akan memanggil model di models.py, dan hasil akhirnya ditampilkan menggunakan template HTML.
 
 Pertanyaan 3 : Jelaskan fungsi git dalam pengembangan perangkat lunak!
 
-    Git adalah sistem version control yang digunakan untuk melacak perubahan kode sumber dalam pengembangan perangkat lunak. Dengan Git, pengembang dapat bekerja sama / kolaboratif untuk melacak setiap perubahan dan memulihkan versi sebelumnya jika terjadi kesalahan.
+    Git adalah sistem version control yang digunakan untuk melacak perubahan kode sumber dalam pengembangan perangkat lunak. 
+    Dengan Git, pengembang dapat bekerja sama / kolaboratif untuk melacak setiap perubahan dan memulihkan versi sebelumnya jika terjadi kesalahan.
 
 Pertanyaan 4 : Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 
-    Menurut beberapa sumber yang saya dapatkan, django dipilih karena merupakan framework yang powerful, namun tetap mudah dipahami oleh pemula. Django juga menyediakan banyak fitur built-in, seperti ORM, autentikasi, dan routing, sehingga pengembang dapat fokus pada logika bisnis.
+    Menurut beberapa sumber yang saya dapatkan, django dipilih karena merupakan framework yang powerful, 
+    namun tetap mudah dipahami oleh pemula. Django juga menyediakan banyak fitur built-in, seperti ORM, 
+    autentikasi, dan routing, sehingga pengembang dapat fokus pada logika bisnis.
 
 Pertanyaan 5 : Mengapa model pada Django disebut sebagai ORM?
 
-    Model di Django disebut ORM (Object-Relational Mapping) karena ia berfungsi untuk memetakan objek di kode Python ke tabel di database secara otomatis. ORM memungkinkan kita untuk berinteraksi dengan database menggunakan objek Python, tanpa harus menulis query SQL secara langsung.
+    Model di Django disebut ORM (Object-Relational Mapping) karena ia berfungsi untuk memetakan objek di kode Python ke tabel di database secara otomatis. 
+    ORM memungkinkan kita untuk berinteraksi dengan database menggunakan objek Python, tanpa harus menulis query SQL secara langsung.
