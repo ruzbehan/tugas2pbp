@@ -89,6 +89,23 @@ Pertanyaan 2 : Buatlah bagan yang berisi request client ke web aplikasi berbasis
     Client akan mengirim request ke URL yang ditentukan di urls.py, yang diarahkan ke fungsi di views.py. 
     Jika diperlukan data dari database, view akan memanggil model di models.py, dan hasil akhirnya ditampilkan menggunakan template HTML.
 
+    versi lengkap bagan sebagai berikut : 
+    ``` 
+    Permintaan (Request) dari Klien
+                 ↓
+    urls.py (Routing: Memetakan URL)
+                 ↓
+    views.py (Logika dan Pengambilan Data)
+                 ↓
+    models.py (Akses Database jika diperlukan)
+                 ↓
+    views.py (Mengembalikan Data ke View)
+                 ↓
+    Template HTML (Menampilkan Data dalam Halaman Web)
+                 ↓
+    Respon (Response) ke Klien (Halaman HTML)
+
+
 Pertanyaan 3 : Jelaskan fungsi git dalam pengembangan perangkat lunak!
 
     Git adalah sistem version control yang digunakan untuk melacak perubahan kode sumber dalam pengembangan perangkat lunak. 
