@@ -205,16 +205,12 @@ Pertanyaan 5 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di ata
             ```
 
 Screenshot :
-
           1. XML
              ![image alt](https://github.com/ruzbehan/tugas2pbp/blob/81d50c5c819d6ca207f4f283a75005da17ab977e/XML.png)
-             
           2. XML by id
              ![image alt](https://github.com/ruzbehan/tugas2pbp/blob/81d50c5c819d6ca207f4f283a75005da17ab977e/xml_by_id.png)
-             
           3. Json
              ![image alt](https://github.com/ruzbehan/tugas2pbp/blob/81d50c5c819d6ca207f4f283a75005da17ab977e/json.png)
-             
           4. Json by id
              ![image alt](https://github.com/ruzbehan/tugas2pbp/blob/81d50c5c819d6ca207f4f283a75005da17ab977e/json_by_id.png)
     
