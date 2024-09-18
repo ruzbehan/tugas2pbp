@@ -1,5 +1,8 @@
 Tautan Aplikasi PWS : https://pbp.cs.ui.ac.id/web/project/muhammad.ruzbehan/belisate
 
+
+TUGAS 2
+
 Pertanyaan 1 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
     CP 1 :
@@ -121,3 +124,85 @@ Pertanyaan 5 : Mengapa model pada Django disebut sebagai ORM?
 
     Model di Django disebut ORM (Object-Relational Mapping) karena ia berfungsi untuk memetakan objek di kode Python ke tabel di database secara otomatis. 
     ORM memungkinkan kita untuk berinteraksi dengan database menggunakan objek Python, tanpa harus menulis query SQL secara langsung.
+
+
+TUGAS 3
+
+Pertanyaan 1 : Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+
+    Data delivery memungkinkan pertukaran informasi antara client dan server. Tanpa mekanisme ini, aplikasi tidak dapat menyajikan konten dinamis, seperti produk atau informasi pengguna yang diambil dari database.
+
+Pertanyaan 2 : Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+
+    JSON lebih populer karena:
+
+       - Lebih ringan dan lebih mudah dibaca oleh manusia.
+       - Memiliki struktur yang lebih sederhana dibandingkan XML.
+       - JSON lebih mudah diintegrasikan dengan JavaScript, yang banyak digunakan di aplikasi web modern.
+
+Pertanyaan 3 : Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut
+
+    Method is_valid() memeriksa apakah data yang dimasukkan ke dalam form sesuai dengan validasi yang telah ditentukan. Jika valid, data tersebut dapat diproses lebih lanjut. Ini penting untuk mencegah data yang tidak valid masuk ke dalam sistem.
+
+Pertanyaan 4 : Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada     form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+
+    csrf_token digunakan untuk mencegah Cross-Site Request Forgery (CSRF), yaitu jenis serangan yang memanfaatkan kepercayaan yang dimiliki sebuah situs terhadap pengguna yang sudah terautentikasi. Jika tidak ada csrf_token, penyerang dapat mengirimkan permintaan palsu yang terlihat real.
+
+Pertanyaan 5 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+    Saya akan membagi checklist tersebut dalam beberapa bagian yaitu: 
+
+        1. Membuat input form untuk menambahkan objek model pada app sebelumnya.
+
+            Pertama-tama kita harus membuat file baru bernama forms.py di folder aplikasi main, kemudian tambahkan form berdasarkan model yang dibutuhkan untuk aplikasi kita. Disini saya membeerikan model Product. Lalu buat class ProductForm dan menambahkan fields penting dalam product, berikut kode saya :
+
+            ```python
+            from django.forms import ModelForm
+            from main.models import Product
+
+            class ProductForm(ModelForm):
+                class Meta:
+                    model = Product
+                    fields = ["name", "price", "description", "quantity"]
+            ```       
+
+        2.  Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.
+
+            Seperti yang saya sebutkan sebelumnya, kita membuat form berdasarkan model Product di forms.py. Setelah itu, kita tambahkan form tersebut ke dalam views dan template untuk membuat halaman input produk.
+            Berikut kode saya :
+
+            ```python
+            def show_xml(request):
+                data = Product.objects.all()
+                return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+            def show_json(request):
+                data = Product.objects.all()
+                return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+            def show_xml_by_id(request, id):
+                data = Product.objects.filter(pk=id)
+                return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+            def show_json_by_id(request, id):
+                data = Product.objects.filter(pk=id)
+                return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+            ```
+
+        3. Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2
+
+            Routing masing-masing views dapat ditambahkan pada urls.py dengan menambahkan kode ini pada baguan urlpatterns
+
+            ```python
+            urlpatterns = [
+            path('', show_main, name='show_main'),
+            path('create-product', create_product, name='create_product'),
+            path('xml/', show_xml, name='show_xml'),
+            path('json/', show_json, name='show_json'),
+            path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+            path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+            ]
+            ```
+
+
+    
