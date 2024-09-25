@@ -205,4 +205,64 @@ Pertanyaan 5 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di ata
             ```
 
 
-    
+TUGAS 4
+
+Pertanyaan 1 : Apa perbedaan antara HttpResponseRedirect() dan redirect()?
+        redirect(): Merupakan shortcut yang digunakan di Django untuk melakukan hal yang sama seperti HttpResponseRedirect(), tetapi penulisan kode menjadi lebih rapih. Fungsi redirect() bisa menerima URL, nama view, atau bahkan objek model, dan secara otomatis mengarahkan pengguna ke halaman yang sesuai. Perbedaan utama yaitu redirect() adalah shortcut untuk HttpResponseRedirect() yang lebih fleksibel dan memudahkan pemrograman, sementara HttpResponseRedirect() adalah cara manual untuk mengarahkan pengguna.
+
+Pertanyaan 2 : Jelaskan cara kerja penghubungan model Product dengan User!
+        Untuk menghubungkan model Product dengan User, kita perlu menggunakan relasi ForeignKey di model Product. Hal ini memungkinkan setiap entri produk terkait dengan pengguna tertentu (satu pengguna bisa memiliki banyak produk).
+
+        ```python
+        from django.db import models
+        from django.contrib.auth.models import User
+
+        class Product(models.Model):
+            name = models.CharField(max_length=100)
+            price = models.IntegerField()
+            description = models.TextField()
+            user = models.ForeignKey(User, on_delete=models.CASCADE)  # Menghubungkan Product dengan User
+        ```
+        ForeignKey(User, on_delete=models.CASCADE) yaitu setiap produk terkait dengan satu pengguna. Jika pengguna dihapus, semua produk yang terkait dengan pengguna tersebut juga dihapus.
+
+Pertanyaan 3 : Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+
+        Authentication (Autentikasi) adalah proses untuk memastikan identitas seorang pengguna, biasanya dengan meminta kredensial seperti username dan password. Saat pengguna login, Django memverifikasi kredensial mereka dan, jika valid, pengguna diizinkan masuk ke sistem.
+
+        Authorization (Otorisasi) adalah proses menentukan izin apa yang dimiliki pengguna setelah mereka terautentikasi. Hal ini menentukan akses mereka terhadap sistem, seperti halaman, atau hak dalam tindakan tertentu.
+
+        Ketika pengguna login di Django:
+
+        1. Authentication dilakukan dengan mencocokkan username dan password.
+        2. Setelah berhasil login, Django mengatur session dan cookies untuk menyimpan status pengguna yang telah terautentikasi.
+        3. Authorization kemudian menentukan apa yang bisa dilakukan pengguna di aplikasi berdasarkan peran mereka (misalnya, admin atau pengguna biasa).
+
+Pertanyaan 4 : Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+
+        Setelah pengguna berhasil login, Django membuat sesi di server yang menyimpan informasi pengguna yang sedang aktif.
+        Django juga menulis cookie ke browser pengguna yang berisi ID sesi, agar memungkinkan server untuk mengidentifikasi pengguna tersebut pada request berikutnya.
+        
+        Penggunaan lain dari cookies:
+
+            1. Menyimpan preferensi pengguna seperti bahasa yang dipilih atau mode tampilan.
+            2. Pelacakan aktivitas: Seperti item dalam keranjang belanja atau halaman yang terakhir dilihat.
+
+        
+        Namun tidak semua cookies aman. Jika tidak dienkripsi, cookie bisa disadap oleh pihak ketiga. Untuk itu, Django mendukung penggunaan secure cookies dan HTTPOnly cookies untuk meningkatkan keamanan.
+
+            1. Secure cookies: Hanya dikirim melalui koneksi HTTPS.
+            2. HTTPOnly cookies: Tidak dapat diakses melalui JavaScript, mengurangi risiko serangan XSS (Cross-Site Scripting).
+
+Pertanyaan 5 :
+        1. Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+            Kita harus menambahkan fuction register, login_user, logout_user pada views.py di direktori main
+
+        2. Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+            Untuk langkah ini saya menyalakan server dengan perintah python manage.py runserver, lalu membuka web buatan saya dan menambahkan akun pengguna menggunakan register, setelah itu saya add 3 product baru untuk masing-masing user.
+
+        3. Menghubungkan model Product dengan User.
+            Cara menghubungkan model product dengan user yaitu dengan menambahkan ForeignKey ke model Product yang terhubung ke model User, sehingga setiap produk terkait dengan pengguna yang membuatnya.
+
+        4. Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+            Cara menampilkan detail pengguna yang sedang login (seperti username) menggunakan request.user di template.
+            lalu gunakan cookie untuk menyimpan informasi seperti last login dan tampilkan di halaman utama.
