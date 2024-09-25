@@ -6,7 +6,7 @@ TUGAS 2
 Pertanyaan 1 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
     CP 1 :
-        Membuat sebuah proyek Django baru, setelah menginstal virtual environment dengan perintah : `python -m venv env`, Didalam directori yang sama harus membuat berkas requirements.txt yang natinya berisi dependencies penting dalam aplikasi django. Lalu setelah selesai melalukan instalasi dengan perintah : `pip install -r requirements.txt`, kita dapat mulai membuat aplikasi django,hal ini dapat dilakukan dengan perintah : `django-admin startproject main` dan dengan posisi env menyala , pada cmd tempat direktori yang sama (yang berisi requirements.txt dan env).
+    Membuat sebuah proyek Django baru, setelah menginstal virtual environment dengan perintah : `python -m venv env`, Didalam directori yang sama harus membuat berkas requirements.txt yang natinya berisi dependencies penting dalam aplikasi django. Lalu setelah selesai melalukan instalasi dengan perintah : `pip install -r requirements.txt`, kita dapat mulai membuat aplikasi django,hal ini dapat dilakukan dengan perintah : `django-admin startproject main` dan dengan posisi env menyala , pada cmd tempat direktori yang sama (yang berisi requirements.txt dan env).
 
     CP 2 :
         Membuat aplikasi dengan nama main pada proyek tersebut. Pada perintah `django-admin startproject main`, "main" disini adalah nama aplikasi kita.
@@ -208,9 +208,12 @@ Pertanyaan 5 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di ata
 TUGAS 4
 
 Pertanyaan 1 : Apa perbedaan antara HttpResponseRedirect() dan redirect()?
-        redirect(): Merupakan shortcut yang digunakan di Django untuk melakukan hal yang sama seperti HttpResponseRedirect(), tetapi penulisan kode menjadi lebih rapih. Fungsi redirect() bisa menerima URL, nama view, atau bahkan objek model, dan secara otomatis mengarahkan pengguna ke halaman yang sesuai. Perbedaan utama yaitu redirect() adalah shortcut untuk HttpResponseRedirect() yang lebih fleksibel dan memudahkan pemrograman, sementara HttpResponseRedirect() adalah cara manual untuk mengarahkan pengguna.
+
+        Redirect() merupakan shortcut yang digunakan di Django untuk melakukan hal yang sama seperti HttpResponseRedirect(), tetapi penulisan kode menjadi lebih rapih. Fungsi redirect() bisa menerima URL, nama view, atau bahkan objek model, dan secara otomatis 
+        mengarahkan pengguna ke halaman yang sesuai. Perbedaan utama yaitu redirect() adalah shortcut untuk HttpResponseRedirect() yang lebih fleksibel dan memudahkan pemrograman, sementara HttpResponseRedirect() adalah cara manual untuk mengarahkan pengguna.
 
 Pertanyaan 2 : Jelaskan cara kerja penghubungan model Product dengan User!
+
         Untuk menghubungkan model Product dengan User, kita perlu menggunakan relasi ForeignKey di model Product. Hal ini memungkinkan setiap entri produk terkait dengan pengguna tertentu (satu pengguna bisa memiliki banyak produk).
 
         ```python
@@ -254,6 +257,7 @@ Pertanyaan 4 : Bagaimana Django mengingat pengguna yang telah login? Jelaskan ke
             2. HTTPOnly cookies: Tidak dapat diakses melalui JavaScript, mengurangi risiko serangan XSS (Cross-Site Scripting).
 
 Pertanyaan 5 :
+
         1. Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
             Kita harus menambahkan fuction register, login_user, logout_user pada views.py di direktori main
 
