@@ -266,3 +266,100 @@ Pertanyaan 5 :
         4. Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
             Cara menampilkan detail pengguna yang sedang login (seperti username) menggunakan request.user di template.
             lalu gunakan cookie untuk menyimpan informasi seperti last login dan tampilkan di halaman utama.
+
+TUGAS 5
+
+Pertanyaan 1: Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+    Dalam CSS, ketika beberapa selector diterapkan pada elemen yang sama, urutan prioritas (specificity) yang menentukan gaya mana yang akan digunakan adalah sebagai berikut (dari yang paling rendah hingga paling tinggi):
+
+    1. Element Selector yaitu menargetkan elemen HTML secara langsung, misalnya div, p, span. Ini memiliki   prioritas yang paling rendah.
+
+    2. Class Selector yaitu selector yang menggunakan tanda titik (.) untuk menargetkan elemen berdasarkan kelas, misalnya .container. Class lebih spesifik daripada element selector.
+
+    3. ID Selector yaitu selector yang menggunakan tanda pagar (#) untuk menargetkan elemen berdasarkan ID, misalnya #header. ID lebih spesifik daripada class.
+
+    4. Inline Styles yaitu gaya yang diterapkan langsung pada elemen HTML menggunakan atribut style="", misalnya <div style="color: red;">. Ini memiliki prioritas lebih tinggi dari selector biasa.
+
+    5. Important Rule (!important) yaitu gaya yang ditandai dengan !important akan selalu diutamakan di atas selector lainnya, meskipun selector lain memiliki prioritas lebih tinggi.
+
+    contoh : 
+        ```css
+        <p id="text" class="info" style="color: green;">Hello World!</p>
+        ```
+        Selector #text (ID) akan memiliki prioritas lebih tinggi dibanding .info (class).
+        Namun, jika ada style="color: green;" di dalam tag <p>, gaya inline ini akan diterapkan.
+        Jika color: red !important; diterapkan dalam CSS, maka gaya ini akan selalu diutamakan.
+
+Pertanyaan 2 : Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+
+    Responsive Design adalah konsep dalam pengembangan web yang bertujuan untuk membuat tampilan dan fungsionalitas aplikasi web menyesuaikan dengan berbagai ukuran layar dan perangkat (misalnya, smartphone, tablet, desktop). Desain responsif penting karena semakin banyak pengguna yang mengakses aplikasi web melalui perangkat dengan ukuran layar yang berbeda.
+
+    Contoh aplikasi :
+        1. Aplikasi yang sudah menerapkan Responsive Design yaitu aplikasi seperti Twitter atau Facebook yang memiliki tampilan yang responsif dan konsisten di berbagai perangkat.
+
+        2. Aplikasi yang belum menerapkan Responsive Design yaitu seperti situs web lama atau aplikasi lawas yang tidak dirancang dengan responsivitas, misalnya situs web buatan tahun 2000-an yang hanya berfungsi baik di desktop.
+
+Pertanyaan 3 : Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+        1. Margin yaitu ruang di luar elemen. Margin mengatur jarak antara elemen tersebut dengan elemen lain di sekitarnya.
+
+        Contoh: margin: 10px; memberi jarak 10px di luar elemen.
+
+        Border yaitu garis yang mengelilingi elemen. Border ada di antara margin dan padding, dan dapat diatur ketebalan, warna, dan jenisnya.
+
+        Contoh: border: 2px solid black; membuat border hitam dengan ketebalan 2px.
+
+        Padding yaitu ruang di dalam elemen, antara konten dan border elemen. Padding menambah jarak di dalam elemen itu sendiri.
+        
+        Contoh: padding: 20px; menambah jarak 20px di dalam elemen, sebelum konten dimulai.
+
+        Contoh implementasi :
+
+        ```css
+        div {
+            margin: 20px;
+            border: 2px solid black;
+            padding: 10px;
+            }
+        ```
+
+Pertanyaan 4 : Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+
+    Flexbox adalah sebuah layout model yang memungkinkan elemen-elemen dalam suatu container untuk disusun secara fleksibel. Flexbox berguna untuk membuat tata letak yang responsif dan dinamis, seperti mengatur elemen secara horizontal atau vertikal, dan mengatur lebar atau tinggi elemen secara otomatis berdasarkan ruang yang tersedia.
+
+    Grid Layout, CSS Grid adalah layout system yang lebih kompleks dari Flexbox, memungkinkan kamu untuk membuat tata letak dua dimensi (baris dan kolom). Grid berguna untuk membuat tata letak yang lebih rumit, seperti galeri gambar atau dashboard, karena memberikan kontrol lebih baik terhadap elemen-elemen dalam container.
+
+Pertanyaan 5 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+    1. Implementasikan fungsi untuk menghapus dan mengedit product.
+        kita dapat menambahkan fuction edit_product dan delete_product pada views.py dan jangan lupa di root pada urls.py
+    
+    2. Kustomisasi halaman login, register, dan tambah product semenarik mungkin.
+        Pada tahap ini saya menggunakan css framework yaitu tailwind untuk mendesain halaman login.html, register.html, create_product.html. Dan membuatnya desain sebaik mungkin seperti ukuran text, warna background, warna text, dan lain sebagainya.
+
+    3.  Jika pada aplikasi belum ada product yang tersimpan, halaman daftar product akan menamp          gambar dan pesan bahwa belum ada product yang terdaftar.
+        Pada tahap ini, kita dapat mengisikan logika sederhana pada main.html, yaitu {% if not product %} dimana jika tidak ada product maka program akan menampilkan sedih-banget.png yang sudah tersimpan
+
+    4. Jika sudah ada product yang tersimpan, halaman daftar product akan menampilkan detail setiap product dengan menggunakan card (tidak boleh sama persis dengan desain pada Tutorial!).
+        Pada tahap ini kita dapat membuat card_info.html dalam direktori main/templates. Lalu kita dapat mendesain card sesuai selera kita menggunakan framework.
+
+    5. Untuk setiap card product, buatlah dua buah button untuk mengedit dan menghapus product pada card tersebut!
+        Pada tahap ini kita dapat membuat href link pada card_product dan menghubungkannya dengan fuction edit_product dan delete_product pada views.py dengan hyperlink : 
+            <a href="{% url 'main:edit_product' produk.pk %}"
+            <a href="{% url 'main:delete_product' produk.pk %}"
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
