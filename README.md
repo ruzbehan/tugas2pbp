@@ -350,7 +350,16 @@ Pertanyaan 5 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di ata
             <a href="{% url 'main:delete_product' produk.pk %}"
 
     6. Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop
+        Untuk membuat navigation bar (navbar) yang responsif terhadap ukuran device mobile dan desktop, saya mengikuti langkah berikut:
+
+        HTML Struktur:
+        Dibagi menjadi dua bagian, satu untuk tampilan desktop dan satu lagi untuk tampilan mobile. Elemen desktop seperti navigasi link diletakkan dalam div yang hanya muncul di layar lebar (menggunakan kelas hidden md:flex).
+        Untuk mobile, menggunakan tombol toggle (hamburger menu) yang akan menampilkan navigasi ketika di klik pada layar kecil (menggunakan kelas md:hidden).
+        CSS Responsif:
         
+        Menggunakan framework seperti Tailwind CSS atau Bootstrap untuk membantu dengan class-class responsif bawaan, sehingga elemen-elemen bisa beradaptasi dengan lebar layar secara otomatis.
+        Mengatur visibilitas menu berdasarkan ukuran layar (misalnya, hidden md:flex untuk desktop dan md:hidden untuk mobile).
+            
 
 
 
