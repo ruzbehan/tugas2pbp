@@ -349,6 +349,9 @@ Pertanyaan 5 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di ata
             <a href="{% url 'main:edit_product' produk.pk %}"
             <a href="{% url 'main:delete_product' produk.pk %}"
 
+    6. Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop
+        
+
 
 
         
