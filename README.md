@@ -352,15 +352,210 @@ Pertanyaan 5 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di ata
     6. Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop
         
 
+TUGAS 6
 
+Pertanyaan 1 : jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+
+    1. Interaktivitas yang lebih baik, JavaScript memungkinkan pengembang untuk menciptakan antarmuka pengguna (UI) yang dinamis dan interaktif. Elemen-elemen halaman dapat diubah atau diperbarui tanpa harus me-reload seluruh halaman, sehingga membuat pengalaman pengguna lebih baik.
+    
+    2. Pengolahan Data secara Real-Time, dengan JavaScript, aplikasi dapat memproses data di sisi klien secara real-time, seperti validasi input form sebelum dikirim ke server.
+
+    3. Cross-Platform, javaScript adalah bahasa lintas platform, sehingga dapat berjalan di hampir semua browser modern dan digunakan untuk berbagai jenis perangkat (desktop, mobile).
 
         
+Pertanyaan 2 : Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+
+    Fungsi await digunakan untuk menunggu penyelesaian dari sebuah Promise sebelum melanjutkan eksekusi kode berikutnya. Saat digunakan dengan fetch(), await akan membuat kode menunggu hingga permintaan fetch() selesai dan respons diterima, tanpa memblokir eksekusi thread utama. Ini membantu memastikan bahwa kode yang bergantung pada hasil fetch() tidak dieksekusi sebelum datanya tersedia. Jika kita tidak menggunakan await, fetch() akan mengembalikan sebuah Promise, dan kode berikutnya akan dieksekusi sebelum respons dari server diterima. Ini dapat menyebabkan bug karena data yang diharapkan mungkin belum siap saat digunakan. Sebagai contoh, jika kita mencoba memanipulasi data dari server tanpa menunggu Promise selesai, kita akan mengakses data yang belum tersedia.
+
+Pertanyaan 3 : Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+
+    Django secara default menggunakan mekanisme CSRF (Cross-Site Request Forgery) untuk melindungi aplikasi dari serangan CSRF. Namun, ketika kita mengirimkan permintaan AJAX, permintaan POST perlu menyertakan token CSRF untuk dapat diproses. 
+
+Pertanyaan 4 : Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+
+    Pembersihan data di backend penting untuk:
+        1. Terkait keamanan, validasi di frontend bisa saja dilewati, sehingga backend memberikan perlindungan terakhir.
+        2. Konsistensi, Backend memastikan data yang disimpan selalu valid dan sesuai format.
+        3. Backend menerima data dari berbagai sumber, bukan hanya frontend, sehingga validasi diperlukan untuk menjaga integritas data.
+
+Pertanyaan 5 : Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+    1. Mengubah cards agar mendukung AJAX GET
+
+        Hapus bagian conditional if pada main.html dan tambahkan line berikut
+        <div id="product_entry_cards"></div>
+
+    2. Buat sebuah fungsi JavaScript
+
+        async function refreshProduct() {
+            document.getElementById("product_entry_cards").innerHTML = "";
+            document.getElementById("product_entry_cards").className = "";
+            const productEntries = await getProduct();
+            let htmlString = "";
+            let classNameString = "";
+
+            if (productEntries.length === 0) {
+                classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+                htmlString = `
+                    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                        <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+                        <p class="text-center text-gray-600 mt-4">Belum ada data product pada Ecommers sate.</p>
+                    </div>
+                `;
+            }
+            else {
+                classNameString = "columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full"
+                productEntries.forEach((item) => {
+                const name = DOMPurify.sanitize(item.fields.name);
+                const description = DOMPurify.sanitize(item.fields.description);
+
+                    htmlString += `
+                    <div class="relative bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:scale-105">
+                    
+                    <div class="bg-pink-500 p-6 text-white">
+                        <h3 class="text-2xl font-bold">${ item.fields.name }</h3>
+                    </div>
+                
+                    
+                    <div class="p-6 space-y-4">
+                        
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-lg font-semibold text-gray-600">Harga</p>
+                                <p class="text-2xl font-bold text-green-500">Rp ${ item.fields.price }</p>
+                            </div>
+                        </div>
+                
+                        
+                        <div>
+                            <p class="text-lg font-semibold text-gray-600">Deskripsi</p>
+                            <p class="text-gray-700">${ item.fields.description }</p>
+                        </div>
+                
+                        
+                        <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-lg font-semibold text-gray-600">Stok</p>
+                            <!-- Logika untuk menampilkan pesan jika stok habis atau stok tersedia -->
+                            <p class="text-2xl font-bold">
+                                ${item.fields.quantity > 0 
+                                    ? `<span class="text-green-500">${item.fields.quantity}</span>`
+                                    : `<span class="text-red-500">Stok Habis</span>`
+                                }
+                            </p>
+                        </div>
+                        </div>
+
+                
+                        
+                        <div class="flex justify-end space-x-2">
+                            <a href="/edit-product/${item.pk}" class="flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                </svg>
+                                Edit
+                            </a>
+                            <a href="/delete/${item.pk}" class="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                </svg>
+                                Hapus
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                    `;
+                });
+            }
+            document.getElementById("product_entry_cards").className = classNameString;
+            document.getElementById("product_entry_cards").innerHTML = htmlString;
+        }
+
+    3. Mengambil data product pengguna yang login dengan AJAX GET
+
+        1. modifikasi fungsi show_json agar mengambil data pemgguna login
+
+            def show_json(request):
+            
+                data = Product.objects.filter(user=request.user)
+                return HttpResponse(serializers.serialize('json', data), content_type='application/json')
+
+        2. Buat fungsi JavaSript
+
+            async function getproductEntries(){
+                return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+            }
+
+        3. Tombol untuk membuka modal dengan form untuk menambah produk
+
+            buat sebuah fungsi yang akan menunjukkan modal
+            function showModal() {
+                const modal = document.getElementById('crudModal');
+                const modalContent = document.getElementById('crudModalContent');
+
+                modal.classList.remove('hidden'); 
+                setTimeout(() => {
+                    modalContent.classList.remove('opacity-0', 'scale-95');
+                    modalContent.classList.add('opacity-100', 'scale-100');
+                }, 50); 
+            }
+
+        4. Buat tommbol yang akan membuka modal pada halaman utama
+        
+            <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-lime-700 hover:bg-lime-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">
+            Add New Product by AJAX
+            </button>
+
+        5. Buat fungsi view yang menambahkan product
+
+            @csrf_exempt
+            @require_POST
+            def add_product_ajax(request):
+                name = strip_tags(request.POST.get("name"))
+                price = strip_tags(request.POST.get("price"))
+                description = strip_tags(request.POST.get("description"))
+                quantity = strip_tags(request.POST.get("quantity"))
+                user = request.user
+
+                new_product = Product(
+                    name=name, description=description,
+                    price=price,
+                    user=user
+                )
+                new_product.save()
+
+                return HttpResponse(b"CREATED", status=201)
+
+        6. Buat path yang mengarah pada fungsi yang baru dibuat
+            path('create-product-ajax/', add_product_ajax, name="add_product_ajax"),
+
+        7.Menghubungkan form modal dengan path yang baru dibuat
+
+            function addProduct() {
+                fetch("{% url 'main:add_product_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#ProductForm')),
+                })
+                .then(response => refreshProduct())
+
+                document.getElementById("ProductForm").reset(); 
+                document.querySelector("[data-modal-toggle='crudModal']").click();
+
+                return false;
+            }
+            document.getElementById("ProductForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+                addProduct();
+            })
+
+        8. Refresh halaman utama untuk melihat data baru
+            panggil fungsi refresh yang telah dibuat
+                refreshProduct();
 
 
 
 
-
-
+ 
 
 
 
